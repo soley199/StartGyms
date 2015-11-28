@@ -1,0 +1,72 @@
+﻿@model StarGyms.Models.PeopleModel
+<div class="col-xs-12">
+    @using (Ajax.BeginForm(
+        "Save",
+        "People",
+        null,
+        new AjaxOptions
+        {
+            HttpMethod = "post",
+            UpdateTargetId = "divRenderBodyResult",
+            InsertionMode = InsertionMode.Replace,
+            OnBegin = "divBlockUI();",
+            OnSuccess = "divUnBlockUI();"
+        },
+        new { @class = "form-horizontal" }))
+    {
+        <!-- Horizontal Form -->
+    //@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.IdPersona)
+    <div class="box box-primary">
+        <div class="box-body">
+            <div id="tabInfoPeople" class="col-xs-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#1a" data-toggle="tab">Cliente</a></li>
+                    <li><a href="#2a" data-toggle="tab">Direcciones</a></li>
+                    <li><a href="#3a" data-toggle="tab">Tel&eacute;fonos</a></li>
+                    <li><a href="#4a" data-toggle="tab">Contactos</a></li>
+                    <li><a href="#5a" data-toggle="tab">Captura de fotos</a></li>
+                    <li><a href="#6a" data-toggle="tab">Documentos</a></li>
+                    <li><a href="#7a" data-toggle="tab">Paquetes</a></li>
+                    <li><a href="#8a" data-toggle="tab">Activar Cliente</a></li>
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="1a">
+                        <div class="row">
+                            @Html.Partial("_PeopleInfo", Model.Persona)
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="2a">
+                        <div class="row">
+                            <h3>Direcciones</h3>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="3a">
+                        <h3>Tel&eacute;fonos</h3>
+                    </div>
+                    <div class="tab-pane" id="4a">
+                        <h3>Contactos</h3>
+                    </div>
+                    <div class="tab-pane" id="5a">
+                        <h3>Captura de fotos</h3>
+                    </div>
+                    <div class="tab-pane" id="6a">
+                        <h3>Documentos</h3>
+                    </div>
+                    <div class="tab-pane" id="7a">
+                        <h3>Paquetes</h3>
+                    </div>
+                    <div class="tab-pane" id="8a">
+                        <h3>Activar Cliente</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <button class="btn btn-primary pull-right" type="submit"><i class="fa fa-save"></i> Guardar</button>
+        </div>
+    </div>
+    }
+</div>

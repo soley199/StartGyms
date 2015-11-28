@@ -1,0 +1,1807 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StartGymDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bitacora">
+          <Key>
+            <PropertyRef Name="IdBitacora" />
+          </Key>
+          <Property Name="IdBitacora" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="FecRegistro" Type="datetime" />
+          <Property Name="Actividad" Type="varchar" MaxLength="250" />
+          <Property Name="Pantalla" Type="varchar" MaxLength="250" />
+          <Property Name="InformacionAdicional" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StartGymDB.dbo.CalendarioPagos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CalendarioPagos">
+          <Key>
+            <PropertyRef Name="IdTipoTabla" />
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdTipoTabla" Type="int" Nullable="false" />
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="FecVencimiento" Type="datetime" />
+          <Property Name="NoPago" Type="int" />
+          <Property Name="Capital" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="Interes" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="IVA" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="VersionTabla" Type="int" />
+          <Property Name="Procesado" Type="bit" />
+        </EntityType>
+        <EntityType Name="CAT_Perfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="int" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="LevelAcceso" Type="int" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="VariaTiempoDeSession" Type="bit" Nullable="false" />
+          <Property Name="TiempoDeSession" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CAT_Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="NombreCorto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="FechaIngreso" Type="datetime" />
+          <Property Name="FechaActualiza" Type="datetime" />
+          <Property Name="StockOriginal" Type="int" Nullable="false" />
+          <Property Name="StockDisponible" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="100" />
+          <Property Name="Capital" Type="decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="IVA" Type="decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="13" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StartGymDB.dbo.CatalogoGen' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CatalogoGen">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Default1" />
+            <PropertyRef Name="Activo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Default1" Type="bit" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StartGymDB.dbo.Consecutivo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Consecutivo">
+          <Key>
+            <PropertyRef Name="NombreTabla" />
+            <PropertyRef Name="IdConsecutivo" />
+          </Key>
+          <Property Name="NombreTabla" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdConsecutivo" Type="int" Nullable="false" />
+          <Property Name="FecUltimoCambio" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="IdContacto" />
+          </Key>
+          <Property Name="IdContacto" Type="int" Nullable="false" />
+          <Property Name="NombrePersona" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="60" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="60" />
+          <Property Name="IdParentesco" Type="int" Nullable="false" />
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="Empresa" Type="varchar" MaxLength="180" />
+          <Property Name="RFC" Type="varchar" MaxLength="15" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="180" />
+          <Property Name="DireccionEmpresa" Type="varchar" MaxLength="255" />
+          <Property Name="Telefono" Type="varchar" MaxLength="12" />
+          <Property Name="Representante" Type="varchar" MaxLength="150" />
+          <Property Name="AvisosEstadodeCuenta" Type="text" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Controlador" Type="varchar" MaxLength="100" />
+          <Property Name="Accion" Type="varchar" MaxLength="100" />
+          <Property Name="ReqLogin" Type="bit" Nullable="false" />
+          <Property Name="EsPopup" Type="bit" Nullable="false" />
+          <Property Name="IdMenuPadre" Type="int" />
+          <Property Name="Orden" Type="float" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="MenuPerfil">
+          <Key>
+            <PropertyRef Name="IdMenuRol" />
+          </Key>
+          <Property Name="IdMenuRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMenu" Type="int" />
+          <Property Name="IdPerfil" Type="int" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="IdMovimiento" />
+          </Key>
+          <Property Name="IdMovimiento" Type="int" Nullable="false" />
+          <Property Name="IdTipoMovimiento" Type="int" Nullable="false" />
+          <Property Name="IdPersona" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="NoPago" Type="int" Nullable="false" />
+          <Property Name="FecMovimiento" Type="datetime" />
+          <Property Name="Capital" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="Interes" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="IVA" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoCapital" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoInteres" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoIVA" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoTotal" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="FecUltimoCambio" Type="datetime" />
+          <Property Name="IdProducto" Type="int" />
+        </EntityType>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="IdPago" />
+          </Key>
+          <Property Name="IdPago" Type="int" Nullable="false" />
+          <Property Name="IdTipoPago" Type="int" Nullable="false" />
+          <Property Name="IdCuentaBancaria" Type="int" Nullable="false" />
+          <Property Name="IdPersona" Type="int" />
+          <Property Name="FecPagoRegistro" Type="datetime" />
+          <Property Name="FecPagoValor" Type="datetime" />
+          <Property Name="MontoPago" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="MontoPagoAplicado" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoPago" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="Suspenso" Type="bit" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="FecUltimoCambio" Type="datetime" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paquetes">
+          <Key>
+            <PropertyRef Name="IdPaquete" />
+          </Key>
+          <Property Name="IdPaquete" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DatosExtras" Type="varchar" MaxLength="150" />
+          <Property Name="Costo" Type="decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="VigenciaIni" Type="datetime" Nullable="false" />
+          <Property Name="VigenciaFin" Type="datetime" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="PorcDescuento" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parametro">
+          <Key>
+            <PropertyRef Name="IdParametro" />
+          </Key>
+          <Property Name="IdParametro" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" />
+          <Property Name="ValorParametroNumeric" Type="varchar" MaxLength="100" />
+          <Property Name="ValorParametroString" Type="varchar" MaxLength="100" />
+          <Property Name="ValorParametroDate" Type="varchar" MaxLength="100" />
+          <Property Name="TablaAsociada" Type="varchar" MaxLength="50" />
+          <Property Name="CampoAsociado" Type="varchar" MaxLength="50" />
+          <Property Name="Orden" Type="numeric" Precision="6" Scale="2" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="NombrePersona" Type="varchar" MaxLength="180" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="180" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="180" Nullable="false" />
+          <Property Name="IdGenero" Type="int" />
+          <Property Name="FechaNac" Type="datetime" />
+          <Property Name="IdTipoPersona" Type="int" />
+          <Property Name="RFC" Type="varchar" MaxLength="13" />
+          <Property Name="FechaAlta" Type="datetime" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="IdEstatusPersona" Type="int" Nullable="false" />
+          <Property Name="Multiclub" Type="int" />
+          <Property Name="IdSucursal" Type="int" />
+          <Property Name="IdConocio" Type="int" Nullable="false" />
+          <Property Name="IdObjetivo" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StartGymDB.dbo.PersonaDireccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PersonaDireccion">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="Calle" />
+            <PropertyRef Name="IdEstado" />
+            <PropertyRef Name="DirecActual" />
+          </Key>
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="Calle" Type="varchar" MaxLength="180" Nullable="false" />
+          <Property Name="NumExterior" Type="varchar" MaxLength="10" />
+          <Property Name="NumInterior" Type="varchar" MaxLength="10" />
+          <Property Name="IdEstado" Type="int" Nullable="false" />
+          <Property Name="CP" Type="varchar" MaxLength="5" />
+          <Property Name="Colonia" Type="varchar" MaxLength="60" />
+          <Property Name="Municipio" Type="varchar" MaxLength="60" />
+          <Property Name="Delegacion" Type="varchar" MaxLength="60" />
+          <Property Name="IdTipoDireccion" Type="int" />
+          <Property Name="DirecActual" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StartGymDB.dbo.PersonaPaquete' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PersonaPaquete">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdPaquete" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="FecRegistro" />
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="IdPaquete" Type="int" Nullable="false" />
+          <Property Name="FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="FecRegistro" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StartGymDB.dbo.RelGrupoFamiliar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RelGrupoFamiliar">
+          <Key>
+            <PropertyRef Name="IdPersonaTitular" />
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersonaTitular" Type="int" Nullable="false" />
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StartGymDB.dbo.RelGrupoPersonas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RelGrupoPersonas">
+          <Key>
+            <PropertyRef Name="IdPersonaTitular" />
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersonaTitular" Type="int" Nullable="false" />
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RelPagoMovimiento">
+          <Key>
+            <PropertyRef Name="IdPagoMovimiento" />
+          </Key>
+          <Property Name="IdPagoMovimiento" Type="int" Nullable="false" />
+          <Property Name="IdPago" Type="int" Nullable="false" />
+          <Property Name="IdMovimiento" Type="int" Nullable="false" />
+          <Property Name="FecAplicacion" Type="datetime" />
+          <Property Name="CapitalPagado" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="InteresPagado" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="IVAPagado" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="TotalPagado" Type="decimal" Precision="13" Scale="2" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="FecUltimoCambio" Type="datetime" />
+          <Property Name="FecCancelacion" Type="datetime" />
+          <Property Name="Reaplicado" Type="bit" />
+          <Property Name="CausaCancelacion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Sucursales">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telfono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Contacto" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StartGymDB.dbo.Telefono' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Telefono">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="Telefono" />
+          </Key>
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+          <Property Name="IdTipoTelefono" Type="int" />
+          <Property Name="Telefono" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="NombreContacto" Type="varchar" MaxLength="180" />
+          <Property Name="Extension" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TipoMovimiento">
+          <Key>
+            <PropertyRef Name="IdTipoMovimiento" />
+          </Key>
+          <Property Name="IdTipoMovimiento" Type="int" Nullable="false" />
+          <Property Name="TipoMovimiento" Type="varchar" MaxLength="50" />
+          <Property Name="ClaveTipoMovimiento" Type="varchar" MaxLength="6" />
+          <Property Name="GeneraIVACapital" Type="bit" />
+          <Property Name="GeneraMora" Type="bit" />
+          <Property Name="Capturable" Type="bit" />
+          <Property Name="EsRenta" Type="bit" />
+          <Property Name="Estatus" Type="bit" />
+          <Property Name="Orden" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="GeneraIVAInteres" Type="bit" />
+          <Property Name="IdTipoGeneracionComprobante" Type="int" />
+          <Property Name="SeparaComprobante" Type="bit" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="UserPass" Type="varchar" MaxLength="255" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="IdUsuarioQRegistro" Type="int" />
+          <Property Name="IdPerfil" Type="int" />
+          <Property Name="NombreCompleto" Type="varchar" MaxLength="200" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="EsPrimerInicio" Type="bit" />
+          <Property Name="RequiereCambioPass" Type="bit" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__026de550">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__0ed252a5">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="PersonaDireccion" Type="Self.PersonaDireccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="PersonaDireccion">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__1431d1af">
+          <End Role="CAT_Perfil" Type="Self.CAT_Perfil" Multiplicity="0..1" />
+          <End Role="MenuPerfil" Type="Self.MenuPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="MenuPerfil">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__17d749a9">
+          <End Role="Sucursales" Type="Self.Sucursales" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__2d07e15a">
+          <End Role="Paquetes" Type="Self.Paquetes" Multiplicity="1" />
+          <End Role="PersonaPaquete" Type="Self.PersonaPaquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paquetes">
+              <PropertyRef Name="IdPaquete" />
+            </Principal>
+            <Dependent Role="PersonaPaquete">
+              <PropertyRef Name="IdPaquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__5ba931b9">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="PersonaPaquete" Type="Self.PersonaPaquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="PersonaPaquete">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__602fd70f">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="PersonaPaquete" Type="Self.PersonaPaquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="PersonaPaquete">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__7547c7c2">
+          <End Role="TipoMovimiento" Type="Self.TipoMovimiento" Multiplicity="1" />
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMovimiento">
+              <PropertyRef Name="IdTipoMovimiento" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="IdTipoMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__797ad4bd">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="CalendarioPagos" Type="Self.CalendarioPagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="CalendarioPagos">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__837d5772">
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="1" />
+          <End Role="RelPagoMovimiento" Type="Self.RelPagoMovimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Principal>
+            <Dependent Role="RelPagoMovimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__92518509">
+          <End Role="CAT_Perfil" Type="Self.CAT_Perfil" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__b222c2e9">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__b631d259">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Contacto">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__bda86554">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__c0aa0ed6">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Bitacora" Type="Self.Bitacora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Bitacora">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__d29c05e1">
+          <End Role="Pago" Type="Self.Pago" Multiplicity="1" />
+          <End Role="RelPagoMovimiento" Type="Self.RelPagoMovimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pago">
+              <PropertyRef Name="IdPago" />
+            </Principal>
+            <Dependent Role="RelPagoMovimiento">
+              <PropertyRef Name="IdPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fb79a941">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="MenuPerfil" Type="Self.MenuPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="IdMenu" />
+            </Principal>
+            <Dependent Role="MenuPerfil">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fd5c9aa7">
+          <End Role="Sucursales" Type="Self.Sucursales" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StartGymDBModelStoreContainer">
+          <EntitySet Name="Bitacora" EntityType="Self.Bitacora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAT_Perfil" EntityType="Self.CAT_Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAT_Producto" EntityType="Self.CAT_Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuPerfil" EntityType="Self.MenuPerfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimiento" EntityType="Self.Movimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paquetes" EntityType="Self.Paquetes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parametro" EntityType="Self.Parametro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RelPagoMovimiento" EntityType="Self.RelPagoMovimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sucursales" EntityType="Self.Sucursales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoMovimiento" EntityType="Self.TipoMovimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalendarioPagos" EntityType="Self.CalendarioPagos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CalendarioPagos].[IdTipoTabla] AS [IdTipoTabla], 
+    [CalendarioPagos].[IdPersona] AS [IdPersona], 
+    [CalendarioPagos].[FecVencimiento] AS [FecVencimiento], 
+    [CalendarioPagos].[NoPago] AS [NoPago], 
+    [CalendarioPagos].[Capital] AS [Capital], 
+    [CalendarioPagos].[Interes] AS [Interes], 
+    [CalendarioPagos].[IVA] AS [IVA], 
+    [CalendarioPagos].[Total] AS [Total], 
+    [CalendarioPagos].[VersionTabla] AS [VersionTabla], 
+    [CalendarioPagos].[Procesado] AS [Procesado]
+    FROM [dbo].[CalendarioPagos] AS [CalendarioPagos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CatalogoGen" EntityType="Self.CatalogoGen" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CatalogoGen].[IdCatalogo] AS [IdCatalogo], 
+    [CatalogoGen].[Id] AS [Id], 
+    [CatalogoGen].[Descripcion] AS [Descripcion], 
+    [CatalogoGen].[Default1] AS [Default1], 
+    [CatalogoGen].[Activo] AS [Activo]
+    FROM [dbo].[CatalogoGen] AS [CatalogoGen]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Consecutivo" EntityType="Self.Consecutivo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Consecutivo].[NombreTabla] AS [NombreTabla], 
+    [Consecutivo].[IdConsecutivo] AS [IdConsecutivo], 
+    [Consecutivo].[FecUltimoCambio] AS [FecUltimoCambio]
+    FROM [dbo].[Consecutivo] AS [Consecutivo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PersonaDireccion" EntityType="Self.PersonaDireccion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PersonaDireccion].[IdPersona] AS [IdPersona], 
+    [PersonaDireccion].[Calle] AS [Calle], 
+    [PersonaDireccion].[NumExterior] AS [NumExterior], 
+    [PersonaDireccion].[NumInterior] AS [NumInterior], 
+    [PersonaDireccion].[IdEstado] AS [IdEstado], 
+    [PersonaDireccion].[CP] AS [CP], 
+    [PersonaDireccion].[Colonia] AS [Colonia], 
+    [PersonaDireccion].[Municipio] AS [Municipio], 
+    [PersonaDireccion].[Delegacion] AS [Delegacion], 
+    [PersonaDireccion].[IdTipoDireccion] AS [IdTipoDireccion], 
+    [PersonaDireccion].[DirecActual] AS [DirecActual]
+    FROM [dbo].[PersonaDireccion] AS [PersonaDireccion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PersonaPaquete" EntityType="Self.PersonaPaquete" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PersonaPaquete].[IdPersona] AS [IdPersona], 
+    [PersonaPaquete].[IdPaquete] AS [IdPaquete], 
+    [PersonaPaquete].[FechaPago] AS [FechaPago], 
+    [PersonaPaquete].[Costo] AS [Costo], 
+    [PersonaPaquete].[FecRegistro] AS [FecRegistro], 
+    [PersonaPaquete].[IdUsuario] AS [IdUsuario]
+    FROM [dbo].[PersonaPaquete] AS [PersonaPaquete]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RelGrupoFamiliar" EntityType="Self.RelGrupoFamiliar" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RelGrupoFamiliar].[IdPersonaTitular] AS [IdPersonaTitular], 
+    [RelGrupoFamiliar].[IdPersona] AS [IdPersona]
+    FROM [dbo].[RelGrupoFamiliar] AS [RelGrupoFamiliar]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RelGrupoPersonas" EntityType="Self.RelGrupoPersonas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RelGrupoPersonas].[IdPersonaTitular] AS [IdPersonaTitular], 
+    [RelGrupoPersonas].[IdPersona] AS [IdPersona]
+    FROM [dbo].[RelGrupoPersonas] AS [RelGrupoPersonas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Telefono" EntityType="Self.Telefono" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Telefono].[IdPersona] AS [IdPersona], 
+    [Telefono].[IdTipoTelefono] AS [IdTipoTelefono], 
+    [Telefono].[Telefono] AS [Telefono], 
+    [Telefono].[NombreContacto] AS [NombreContacto], 
+    [Telefono].[Extension] AS [Extension]
+    FROM [dbo].[Telefono] AS [Telefono]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__026de550" Association="Self.FK__026de550">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Movimiento" EntitySet="Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__0ed252a5" Association="Self.FK__0ed252a5">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="PersonaDireccion" EntitySet="PersonaDireccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__1431d1af" Association="Self.FK__1431d1af">
+            <End Role="CAT_Perfil" EntitySet="CAT_Perfil" />
+            <End Role="MenuPerfil" EntitySet="MenuPerfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK__17d749a9" Association="Self.FK__17d749a9">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK__2d07e15a" Association="Self.FK__2d07e15a">
+            <End Role="Paquetes" EntitySet="Paquetes" />
+            <End Role="PersonaPaquete" EntitySet="PersonaPaquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK__5ba931b9" Association="Self.FK__5ba931b9">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="PersonaPaquete" EntitySet="PersonaPaquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK__602fd70f" Association="Self.FK__602fd70f">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="PersonaPaquete" EntitySet="PersonaPaquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK__7547c7c2" Association="Self.FK__7547c7c2">
+            <End Role="TipoMovimiento" EntitySet="TipoMovimiento" />
+            <End Role="Movimiento" EntitySet="Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__797ad4bd" Association="Self.FK__797ad4bd">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="CalendarioPagos" EntitySet="CalendarioPagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__837d5772" Association="Self.FK__837d5772">
+            <End Role="Movimiento" EntitySet="Movimiento" />
+            <End Role="RelPagoMovimiento" EntitySet="RelPagoMovimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__92518509" Association="Self.FK__92518509">
+            <End Role="CAT_Perfil" EntitySet="CAT_Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__b222c2e9" Association="Self.FK__b222c2e9">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK__b631d259" Association="Self.FK__b631d259">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Contacto" EntitySet="Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__bda86554" Association="Self.FK__bda86554">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK__c0aa0ed6" Association="Self.FK__c0aa0ed6">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Bitacora" EntitySet="Bitacora" />
+          </AssociationSet>
+          <AssociationSet Name="FK__d29c05e1" Association="Self.FK__d29c05e1">
+            <End Role="Pago" EntitySet="Pago" />
+            <End Role="RelPagoMovimiento" EntitySet="RelPagoMovimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fb79a941" Association="Self.FK__fb79a941">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuPerfil" EntitySet="MenuPerfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fd5c9aa7" Association="Self.FK__fd5c9aa7">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StartGymDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bitacora">
+          <Key>
+            <PropertyRef Name="IdBitacora" />
+          </Key>
+          <Property Name="IdBitacora" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FecRegistro" Type="DateTime" Precision="3" />
+          <Property Name="Actividad" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Pantalla" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="InformacionAdicional" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__c0aa0ed6" FromRole="Bitacora" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="CAT_Perfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LevelAcceso" Type="Int32" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="VariaTiempoDeSession" Type="Boolean" Nullable="false" />
+          <Property Name="TiempoDeSession" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MenuPerfils" Relationship="Self.FK__1431d1af" FromRole="CAT_Perfil" ToRole="MenuPerfil" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__92518509" FromRole="CAT_Perfil" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="CAT_Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="NombreCorto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="FechaActualiza" Type="DateTime" Precision="3" />
+          <Property Name="StockOriginal" Type="Int32" Nullable="false" />
+          <Property Name="StockDisponible" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Capital" Type="Decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="IVA" Type="Decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="13" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="IdContacto" />
+          </Key>
+          <Property Name="IdContacto" Type="Int32" Nullable="false" />
+          <Property Name="NombrePersona" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="IdParentesco" Type="Int32" Nullable="false" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__b631d259" FromRole="Contacto" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Empresa1" Type="String" MaxLength="180" FixedLength="false" Unicode="false" />
+          <Property Name="RFC" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="180" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionEmpresa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Representante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AvisosEstadodeCuenta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Controlador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Accion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ReqLogin" Type="Boolean" Nullable="false" />
+          <Property Name="EsPopup" Type="Boolean" Nullable="false" />
+          <Property Name="IdMenuPadre" Type="Int32" />
+          <Property Name="Orden" Type="Double" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="MenuPerfils" Relationship="Self.FK__fb79a941" FromRole="Menu" ToRole="MenuPerfil" />
+        </EntityType>
+        <EntityType Name="MenuPerfil">
+          <Key>
+            <PropertyRef Name="IdMenuRol" />
+          </Key>
+          <Property Name="IdMenuRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMenu" Type="Int32" />
+          <Property Name="IdPerfil" Type="Int32" />
+          <NavigationProperty Name="CAT_Perfil" Relationship="Self.FK__1431d1af" FromRole="MenuPerfil" ToRole="CAT_Perfil" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK__fb79a941" FromRole="MenuPerfil" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="IdMovimiento" />
+          </Key>
+          <Property Name="IdMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="IdPersona" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NoPago" Type="Int32" Nullable="false" />
+          <Property Name="FecMovimiento" Type="DateTime" Precision="3" />
+          <Property Name="Capital" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="Interes" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="IVA" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoCapital" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoInteres" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoIVA" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoTotal" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="FecUltimoCambio" Type="DateTime" Precision="3" />
+          <Property Name="IdProducto" Type="Int32" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__026de550" FromRole="Movimiento" ToRole="Persona" />
+          <NavigationProperty Name="TipoMovimiento" Relationship="Self.FK__7547c7c2" FromRole="Movimiento" ToRole="TipoMovimiento" />
+          <NavigationProperty Name="RelPagoMovimientoes" Relationship="Self.FK__837d5772" FromRole="Movimiento" ToRole="RelPagoMovimiento" />
+        </EntityType>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="IdPago" />
+          </Key>
+          <Property Name="IdPago" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoPago" Type="Int32" Nullable="false" />
+          <Property Name="IdCuentaBancaria" Type="Int32" Nullable="false" />
+          <Property Name="IdPersona" Type="Int32" />
+          <Property Name="FecPagoRegistro" Type="DateTime" Precision="3" />
+          <Property Name="FecPagoValor" Type="DateTime" Precision="3" />
+          <Property Name="MontoPago" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="MontoPagoAplicado" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="SaldoPago" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="Suspenso" Type="Boolean" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="FecUltimoCambio" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__b222c2e9" FromRole="Pago" ToRole="Persona" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__bda86554" FromRole="Pago" ToRole="Usuario" />
+          <NavigationProperty Name="RelPagoMovimientoes" Relationship="Self.FK__d29c05e1" FromRole="Pago" ToRole="RelPagoMovimiento" />
+        </EntityType>
+        <EntityType Name="Paquete">
+          <Key>
+            <PropertyRef Name="IdPaquete" />
+          </Key>
+          <Property Name="IdPaquete" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DatosExtras" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Costo" Type="Decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="VigenciaIni" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VigenciaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="PorcDescuento" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <NavigationProperty Name="PersonaPaquetes" Relationship="Self.FK__2d07e15a" FromRole="Paquetes" ToRole="PersonaPaquete" />
+        </EntityType>
+        <EntityType Name="Parametro">
+          <Key>
+            <PropertyRef Name="IdParametro" />
+          </Key>
+          <Property Name="IdParametro" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" />
+          <Property Name="ValorParametroNumeric" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ValorParametroString" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ValorParametroDate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TablaAsociada" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CampoAsociado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Decimal" Precision="6" Scale="2" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="NombrePersona" Type="String" MaxLength="180" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="180" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="180" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdGenero" Type="Int32" />
+          <Property Name="FechaNac" Type="DateTime" Precision="3" />
+          <Property Name="IdTipoPersona" Type="Int32" />
+          <Property Name="RFC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstatusPersona" Type="Int32" Nullable="false" />
+          <Property Name="Multiclub" Type="Int32" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="IdConocio" Type="Int32" Nullable="false" />
+          <Property Name="IdObjetivo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contactoes" Relationship="Self.FK__b631d259" FromRole="Persona" ToRole="Contacto" />
+          <NavigationProperty Name="Movimientoes" Relationship="Self.FK__026de550" FromRole="Persona" ToRole="Movimiento" />
+          <NavigationProperty Name="Pagoes" Relationship="Self.FK__b222c2e9" FromRole="Persona" ToRole="Pago" />
+          <NavigationProperty Name="PersonaDireccions" Relationship="Self.FK__0ed252a5" FromRole="Persona" ToRole="PersonaDireccion" />
+          <NavigationProperty Name="Sucursale" Relationship="Self.FK__17d749a9" FromRole="Persona" ToRole="Sucursales" />
+          <NavigationProperty Name="PersonaPaquetes" Relationship="Self.FK__5ba931b9" FromRole="Persona" ToRole="PersonaPaquete" />
+          <NavigationProperty Name="CalendarioPagos" Relationship="Self.FK__797ad4bd" FromRole="Persona" ToRole="CalendarioPagos" />
+        </EntityType>
+        <EntityType Name="RelPagoMovimiento">
+          <Key>
+            <PropertyRef Name="IdPagoMovimiento" />
+          </Key>
+          <Property Name="IdPagoMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="IdPago" Type="Int32" Nullable="false" />
+          <Property Name="IdMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="FecAplicacion" Type="DateTime" Precision="3" />
+          <Property Name="CapitalPagado" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="InteresPagado" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="IVAPagado" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="TotalPagado" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="FecUltimoCambio" Type="DateTime" Precision="3" />
+          <Property Name="FecCancelacion" Type="DateTime" Precision="3" />
+          <Property Name="Reaplicado" Type="Boolean" />
+          <Property Name="CausaCancelacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Movimiento" Relationship="Self.FK__837d5772" FromRole="RelPagoMovimiento" ToRole="Movimiento" />
+          <NavigationProperty Name="Pago" Relationship="Self.FK__d29c05e1" FromRole="RelPagoMovimiento" ToRole="Pago" />
+        </EntityType>
+        <EntityType Name="Sucursale">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telfono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Personas" Relationship="Self.FK__17d749a9" FromRole="Sucursales" ToRole="Persona" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__fd5c9aa7" FromRole="Sucursales" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="TipoMovimiento">
+          <Key>
+            <PropertyRef Name="IdTipoMovimiento" />
+          </Key>
+          <Property Name="IdTipoMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="TipoMovimiento1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveTipoMovimiento" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="GeneraIVACapital" Type="Boolean" />
+          <Property Name="GeneraMora" Type="Boolean" />
+          <Property Name="Capturable" Type="Boolean" />
+          <Property Name="EsRenta" Type="Boolean" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="Orden" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="GeneraIVAInteres" Type="Boolean" />
+          <Property Name="IdTipoGeneracionComprobante" Type="Int32" />
+          <Property Name="SeparaComprobante" Type="Boolean" />
+          <NavigationProperty Name="Movimientoes" Relationship="Self.FK__7547c7c2" FromRole="TipoMovimiento" ToRole="Movimiento" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPass" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioQRegistro" Type="Int32" />
+          <Property Name="IdPerfil" Type="Int32" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="EsPrimerInicio" Type="Boolean" />
+          <Property Name="RequiereCambioPass" Type="Boolean" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bitacoras" Relationship="Self.FK__c0aa0ed6" FromRole="Usuario" ToRole="Bitacora" />
+          <NavigationProperty Name="CAT_Perfil" Relationship="Self.FK__92518509" FromRole="Usuario" ToRole="CAT_Perfil" />
+          <NavigationProperty Name="Pagoes" Relationship="Self.FK__bda86554" FromRole="Usuario" ToRole="Pago" />
+          <NavigationProperty Name="Sucursale" Relationship="Self.FK__fd5c9aa7" FromRole="Usuario" ToRole="Sucursales" />
+          <NavigationProperty Name="PersonaPaquetes" Relationship="Self.FK__602fd70f" FromRole="Usuario" ToRole="PersonaPaquete" />
+        </EntityType>
+        <EntityType Name="CalendarioPago">
+          <Key>
+            <PropertyRef Name="IdTipoTabla" />
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdTipoTabla" Type="Int32" Nullable="false" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="FecVencimiento" Type="DateTime" Precision="3" />
+          <Property Name="NoPago" Type="Int32" />
+          <Property Name="Capital" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="Interes" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="IVA" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="VersionTabla" Type="Int32" />
+          <Property Name="Procesado" Type="Boolean" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__797ad4bd" FromRole="CalendarioPagos" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="CatalogoGen">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Default1" />
+            <PropertyRef Name="Activo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Default1" Type="Boolean" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Consecutivo">
+          <Key>
+            <PropertyRef Name="NombreTabla" />
+            <PropertyRef Name="IdConsecutivo" />
+          </Key>
+          <Property Name="NombreTabla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdConsecutivo" Type="Int32" Nullable="false" />
+          <Property Name="FecUltimoCambio" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PersonaDireccion">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="Calle" />
+            <PropertyRef Name="IdEstado" />
+            <PropertyRef Name="DirecActual" />
+          </Key>
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="Calle" Type="String" MaxLength="180" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumExterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumInterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstado" Type="Int32" Nullable="false" />
+          <Property Name="CP" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Colonia" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Municipio" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Delegacion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDireccion" Type="Int32" />
+          <Property Name="DirecActual" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__0ed252a5" FromRole="PersonaDireccion" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="PersonaPaquete">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdPaquete" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="FecRegistro" />
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="IdPaquete" Type="Int32" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Costo" Type="Decimal" Precision="13" Scale="2" Nullable="false" />
+          <Property Name="FecRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Paquete" Relationship="Self.FK__2d07e15a" FromRole="PersonaPaquete" ToRole="Paquetes" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__5ba931b9" FromRole="PersonaPaquete" ToRole="Persona" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__602fd70f" FromRole="PersonaPaquete" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="RelGrupoFamiliar">
+          <Key>
+            <PropertyRef Name="IdPersonaTitular" />
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersonaTitular" Type="Int32" Nullable="false" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RelGrupoPersona">
+          <Key>
+            <PropertyRef Name="IdPersonaTitular" />
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersonaTitular" Type="Int32" Nullable="false" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Telefono">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="Telefono1" />
+          </Key>
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoTelefono" Type="Int32" />
+          <Property Name="Telefono1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreContacto" Type="String" MaxLength="180" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__c0aa0ed6">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Bitacora" Type="Self.Bitacora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Bitacora">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__1431d1af">
+          <End Role="CAT_Perfil" Type="Self.CAT_Perfil" Multiplicity="0..1" />
+          <End Role="MenuPerfil" Type="Self.MenuPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="MenuPerfil">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__92518509">
+          <End Role="CAT_Perfil" Type="Self.CAT_Perfil" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAT_Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__b631d259">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Contacto">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fb79a941">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="MenuPerfil" Type="Self.MenuPerfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="IdMenu" />
+            </Principal>
+            <Dependent Role="MenuPerfil">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__026de550">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__7547c7c2">
+          <End Role="TipoMovimiento" Type="Self.TipoMovimiento" Multiplicity="1" />
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMovimiento">
+              <PropertyRef Name="IdTipoMovimiento" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="IdTipoMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__837d5772">
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="1" />
+          <End Role="RelPagoMovimiento" Type="Self.RelPagoMovimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Principal>
+            <Dependent Role="RelPagoMovimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__b222c2e9">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__bda86554">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__d29c05e1">
+          <End Role="Pago" Type="Self.Pago" Multiplicity="1" />
+          <End Role="RelPagoMovimiento" Type="Self.RelPagoMovimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pago">
+              <PropertyRef Name="IdPago" />
+            </Principal>
+            <Dependent Role="RelPagoMovimiento">
+              <PropertyRef Name="IdPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__2d07e15a">
+          <End Role="Paquetes" Type="Self.Paquete" Multiplicity="1" />
+          <End Role="PersonaPaquete" Type="Self.PersonaPaquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paquetes">
+              <PropertyRef Name="IdPaquete" />
+            </Principal>
+            <Dependent Role="PersonaPaquete">
+              <PropertyRef Name="IdPaquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__0ed252a5">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="PersonaDireccion" Type="Self.PersonaDireccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="PersonaDireccion">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__17d749a9">
+          <End Role="Sucursales" Type="Self.Sucursale" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__5ba931b9">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="PersonaPaquete" Type="Self.PersonaPaquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="PersonaPaquete">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__797ad4bd">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="CalendarioPagos" Type="Self.CalendarioPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="IdPersona" />
+            </Principal>
+            <Dependent Role="CalendarioPagos">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fd5c9aa7">
+          <End Role="Sucursales" Type="Self.Sucursale" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__602fd70f">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="PersonaPaquete" Type="Self.PersonaPaquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="PersonaPaquete">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StartGymDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bitacoras" EntityType="Self.Bitacora" />
+          <EntitySet Name="CAT_Perfil" EntityType="Self.CAT_Perfil" />
+          <EntitySet Name="CAT_Producto" EntityType="Self.CAT_Producto" />
+          <EntitySet Name="Contactoes" EntityType="Self.Contacto" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresa" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="MenuPerfils" EntityType="Self.MenuPerfil" />
+          <EntitySet Name="Movimientoes" EntityType="Self.Movimiento" />
+          <EntitySet Name="Pagoes" EntityType="Self.Pago" />
+          <EntitySet Name="Paquetes" EntityType="Self.Paquete" />
+          <EntitySet Name="Parametroes" EntityType="Self.Parametro" />
+          <EntitySet Name="Personas" EntityType="Self.Persona" />
+          <EntitySet Name="RelPagoMovimientoes" EntityType="Self.RelPagoMovimiento" />
+          <EntitySet Name="Sucursales" EntityType="Self.Sucursale" />
+          <EntitySet Name="TipoMovimientoes" EntityType="Self.TipoMovimiento" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <EntitySet Name="CalendarioPagos" EntityType="Self.CalendarioPago" />
+          <EntitySet Name="CatalogoGens" EntityType="Self.CatalogoGen" />
+          <EntitySet Name="Consecutivoes" EntityType="Self.Consecutivo" />
+          <EntitySet Name="PersonaDireccions" EntityType="Self.PersonaDireccion" />
+          <EntitySet Name="PersonaPaquetes" EntityType="Self.PersonaPaquete" />
+          <EntitySet Name="RelGrupoFamiliars" EntityType="Self.RelGrupoFamiliar" />
+          <EntitySet Name="RelGrupoPersonas" EntityType="Self.RelGrupoPersona" />
+          <EntitySet Name="Telefonoes" EntityType="Self.Telefono" />
+          <AssociationSet Name="FK__c0aa0ed6" Association="Self.FK__c0aa0ed6">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Bitacora" EntitySet="Bitacoras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__1431d1af" Association="Self.FK__1431d1af">
+            <End Role="CAT_Perfil" EntitySet="CAT_Perfil" />
+            <End Role="MenuPerfil" EntitySet="MenuPerfils" />
+          </AssociationSet>
+          <AssociationSet Name="FK__92518509" Association="Self.FK__92518509">
+            <End Role="CAT_Perfil" EntitySet="CAT_Perfil" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__b631d259" Association="Self.FK__b631d259">
+            <End Role="Persona" EntitySet="Personas" />
+            <End Role="Contacto" EntitySet="Contactoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fb79a941" Association="Self.FK__fb79a941">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="MenuPerfil" EntitySet="MenuPerfils" />
+          </AssociationSet>
+          <AssociationSet Name="FK__026de550" Association="Self.FK__026de550">
+            <End Role="Persona" EntitySet="Personas" />
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__7547c7c2" Association="Self.FK__7547c7c2">
+            <End Role="TipoMovimiento" EntitySet="TipoMovimientoes" />
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__837d5772" Association="Self.FK__837d5772">
+            <End Role="Movimiento" EntitySet="Movimientoes" />
+            <End Role="RelPagoMovimiento" EntitySet="RelPagoMovimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__b222c2e9" Association="Self.FK__b222c2e9">
+            <End Role="Persona" EntitySet="Personas" />
+            <End Role="Pago" EntitySet="Pagoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__bda86554" Association="Self.FK__bda86554">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Pago" EntitySet="Pagoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__d29c05e1" Association="Self.FK__d29c05e1">
+            <End Role="Pago" EntitySet="Pagoes" />
+            <End Role="RelPagoMovimiento" EntitySet="RelPagoMovimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__2d07e15a" Association="Self.FK__2d07e15a">
+            <End Role="Paquetes" EntitySet="Paquetes" />
+            <End Role="PersonaPaquete" EntitySet="PersonaPaquetes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__0ed252a5" Association="Self.FK__0ed252a5">
+            <End Role="Persona" EntitySet="Personas" />
+            <End Role="PersonaDireccion" EntitySet="PersonaDireccions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__17d749a9" Association="Self.FK__17d749a9">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Persona" EntitySet="Personas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__5ba931b9" Association="Self.FK__5ba931b9">
+            <End Role="Persona" EntitySet="Personas" />
+            <End Role="PersonaPaquete" EntitySet="PersonaPaquetes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__797ad4bd" Association="Self.FK__797ad4bd">
+            <End Role="Persona" EntitySet="Personas" />
+            <End Role="CalendarioPagos" EntitySet="CalendarioPagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fd5c9aa7" Association="Self.FK__fd5c9aa7">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__602fd70f" Association="Self.FK__602fd70f">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="PersonaPaquete" EntitySet="PersonaPaquetes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StartGymDBModelStoreContainer" CdmEntityContainer="StartGymDB">
+          <EntitySetMapping Name="Bitacoras">
+            <EntityTypeMapping TypeName="StartGymDBModel.Bitacora">
+              <MappingFragment StoreEntitySet="Bitacora">
+                <ScalarProperty Name="IdBitacora" ColumnName="IdBitacora" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="FecRegistro" ColumnName="FecRegistro" />
+                <ScalarProperty Name="Actividad" ColumnName="Actividad" />
+                <ScalarProperty Name="Pantalla" ColumnName="Pantalla" />
+                <ScalarProperty Name="InformacionAdicional" ColumnName="InformacionAdicional" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAT_Perfil">
+            <EntityTypeMapping TypeName="StartGymDBModel.CAT_Perfil">
+              <MappingFragment StoreEntitySet="CAT_Perfil">
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="LevelAcceso" ColumnName="LevelAcceso" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="VariaTiempoDeSession" ColumnName="VariaTiempoDeSession" />
+                <ScalarProperty Name="TiempoDeSession" ColumnName="TiempoDeSession" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAT_Producto">
+            <EntityTypeMapping TypeName="StartGymDBModel.CAT_Producto">
+              <MappingFragment StoreEntitySet="CAT_Producto">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="NombreCorto" ColumnName="NombreCorto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="FechaActualiza" ColumnName="FechaActualiza" />
+                <ScalarProperty Name="StockOriginal" ColumnName="StockOriginal" />
+                <ScalarProperty Name="StockDisponible" ColumnName="StockDisponible" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contactoes">
+            <EntityTypeMapping TypeName="StartGymDBModel.Contacto">
+              <MappingFragment StoreEntitySet="Contacto">
+                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
+                <ScalarProperty Name="NombrePersona" ColumnName="NombrePersona" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="IdParentesco" ColumnName="IdParentesco" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="StartGymDBModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Empresa1" ColumnName="Empresa" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="DireccionEmpresa" ColumnName="DireccionEmpresa" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Representante" ColumnName="Representante" />
+                <ScalarProperty Name="AvisosEstadodeCuenta" ColumnName="AvisosEstadodeCuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="StartGymDBModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="ReqLogin" ColumnName="ReqLogin" />
+                <ScalarProperty Name="EsPopup" ColumnName="EsPopup" />
+                <ScalarProperty Name="IdMenuPadre" ColumnName="IdMenuPadre" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuPerfils">
+            <EntityTypeMapping TypeName="StartGymDBModel.MenuPerfil">
+              <MappingFragment StoreEntitySet="MenuPerfil">
+                <ScalarProperty Name="IdMenuRol" ColumnName="IdMenuRol" />
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimientoes">
+            <EntityTypeMapping TypeName="StartGymDBModel.Movimiento">
+              <MappingFragment StoreEntitySet="Movimiento">
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
+                <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NoPago" ColumnName="NoPago" />
+                <ScalarProperty Name="FecMovimiento" ColumnName="FecMovimiento" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Interes" ColumnName="Interes" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="SaldoCapital" ColumnName="SaldoCapital" />
+                <ScalarProperty Name="SaldoInteres" ColumnName="SaldoInteres" />
+                <ScalarProperty Name="SaldoIVA" ColumnName="SaldoIVA" />
+                <ScalarProperty Name="SaldoTotal" ColumnName="SaldoTotal" />
+                <ScalarProperty Name="FecUltimoCambio" ColumnName="FecUltimoCambio" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagoes">
+            <EntityTypeMapping TypeName="StartGymDBModel.Pago">
+              <MappingFragment StoreEntitySet="Pago">
+                <ScalarProperty Name="IdPago" ColumnName="IdPago" />
+                <ScalarProperty Name="IdTipoPago" ColumnName="IdTipoPago" />
+                <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="FecPagoRegistro" ColumnName="FecPagoRegistro" />
+                <ScalarProperty Name="FecPagoValor" ColumnName="FecPagoValor" />
+                <ScalarProperty Name="MontoPago" ColumnName="MontoPago" />
+                <ScalarProperty Name="MontoPagoAplicado" ColumnName="MontoPagoAplicado" />
+                <ScalarProperty Name="SaldoPago" ColumnName="SaldoPago" />
+                <ScalarProperty Name="Suspenso" ColumnName="Suspenso" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FecUltimoCambio" ColumnName="FecUltimoCambio" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paquetes">
+            <EntityTypeMapping TypeName="StartGymDBModel.Paquete">
+              <MappingFragment StoreEntitySet="Paquetes">
+                <ScalarProperty Name="IdPaquete" ColumnName="IdPaquete" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DatosExtras" ColumnName="DatosExtras" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="VigenciaIni" ColumnName="VigenciaIni" />
+                <ScalarProperty Name="VigenciaFin" ColumnName="VigenciaFin" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="PorcDescuento" ColumnName="PorcDescuento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametroes">
+            <EntityTypeMapping TypeName="StartGymDBModel.Parametro">
+              <MappingFragment StoreEntitySet="Parametro">
+                <ScalarProperty Name="IdParametro" ColumnName="IdParametro" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ValorParametroNumeric" ColumnName="ValorParametroNumeric" />
+                <ScalarProperty Name="ValorParametroString" ColumnName="ValorParametroString" />
+                <ScalarProperty Name="ValorParametroDate" ColumnName="ValorParametroDate" />
+                <ScalarProperty Name="TablaAsociada" ColumnName="TablaAsociada" />
+                <ScalarProperty Name="CampoAsociado" ColumnName="CampoAsociado" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personas">
+            <EntityTypeMapping TypeName="StartGymDBModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="NombrePersona" ColumnName="NombrePersona" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="IdGenero" ColumnName="IdGenero" />
+                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+                <ScalarProperty Name="IdTipoPersona" ColumnName="IdTipoPersona" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdEstatusPersona" ColumnName="IdEstatusPersona" />
+                <ScalarProperty Name="Multiclub" ColumnName="Multiclub" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdConocio" ColumnName="IdConocio" />
+                <ScalarProperty Name="IdObjetivo" ColumnName="IdObjetivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelPagoMovimientoes">
+            <EntityTypeMapping TypeName="StartGymDBModel.RelPagoMovimiento">
+              <MappingFragment StoreEntitySet="RelPagoMovimiento">
+                <ScalarProperty Name="IdPagoMovimiento" ColumnName="IdPagoMovimiento" />
+                <ScalarProperty Name="IdPago" ColumnName="IdPago" />
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
+                <ScalarProperty Name="FecAplicacion" ColumnName="FecAplicacion" />
+                <ScalarProperty Name="CapitalPagado" ColumnName="CapitalPagado" />
+                <ScalarProperty Name="InteresPagado" ColumnName="InteresPagado" />
+                <ScalarProperty Name="IVAPagado" ColumnName="IVAPagado" />
+                <ScalarProperty Name="TotalPagado" ColumnName="TotalPagado" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FecUltimoCambio" ColumnName="FecUltimoCambio" />
+                <ScalarProperty Name="FecCancelacion" ColumnName="FecCancelacion" />
+                <ScalarProperty Name="Reaplicado" ColumnName="Reaplicado" />
+                <ScalarProperty Name="CausaCancelacion" ColumnName="CausaCancelacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sucursales">
+            <EntityTypeMapping TypeName="StartGymDBModel.Sucursale">
+              <MappingFragment StoreEntitySet="Sucursales">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telfono" ColumnName="Telfono" />
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoMovimientoes">
+            <EntityTypeMapping TypeName="StartGymDBModel.TipoMovimiento">
+              <MappingFragment StoreEntitySet="TipoMovimiento">
+                <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+                <ScalarProperty Name="TipoMovimiento1" ColumnName="TipoMovimiento" />
+                <ScalarProperty Name="ClaveTipoMovimiento" ColumnName="ClaveTipoMovimiento" />
+                <ScalarProperty Name="GeneraIVACapital" ColumnName="GeneraIVACapital" />
+                <ScalarProperty Name="GeneraMora" ColumnName="GeneraMora" />
+                <ScalarProperty Name="Capturable" ColumnName="Capturable" />
+                <ScalarProperty Name="EsRenta" ColumnName="EsRenta" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="GeneraIVAInteres" ColumnName="GeneraIVAInteres" />
+                <ScalarProperty Name="IdTipoGeneracionComprobante" ColumnName="IdTipoGeneracionComprobante" />
+                <ScalarProperty Name="SeparaComprobante" ColumnName="SeparaComprobante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="StartGymDBModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdUsuarioQRegistro" ColumnName="IdUsuarioQRegistro" />
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="EsPrimerInicio" ColumnName="EsPrimerInicio" />
+                <ScalarProperty Name="RequiereCambioPass" ColumnName="RequiereCambioPass" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalendarioPagos">
+            <EntityTypeMapping TypeName="StartGymDBModel.CalendarioPago">
+              <MappingFragment StoreEntitySet="CalendarioPagos">
+                <ScalarProperty Name="IdTipoTabla" ColumnName="IdTipoTabla" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="FecVencimiento" ColumnName="FecVencimiento" />
+                <ScalarProperty Name="NoPago" ColumnName="NoPago" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Interes" ColumnName="Interes" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="VersionTabla" ColumnName="VersionTabla" />
+                <ScalarProperty Name="Procesado" ColumnName="Procesado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatalogoGens">
+            <EntityTypeMapping TypeName="StartGymDBModel.CatalogoGen">
+              <MappingFragment StoreEntitySet="CatalogoGen">
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Default1" ColumnName="Default1" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consecutivoes">
+            <EntityTypeMapping TypeName="StartGymDBModel.Consecutivo">
+              <MappingFragment StoreEntitySet="Consecutivo">
+                <ScalarProperty Name="NombreTabla" ColumnName="NombreTabla" />
+                <ScalarProperty Name="IdConsecutivo" ColumnName="IdConsecutivo" />
+                <ScalarProperty Name="FecUltimoCambio" ColumnName="FecUltimoCambio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonaDireccions">
+            <EntityTypeMapping TypeName="StartGymDBModel.PersonaDireccion">
+              <MappingFragment StoreEntitySet="PersonaDireccion">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NumExterior" ColumnName="NumExterior" />
+                <ScalarProperty Name="NumInterior" ColumnName="NumInterior" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Delegacion" ColumnName="Delegacion" />
+                <ScalarProperty Name="IdTipoDireccion" ColumnName="IdTipoDireccion" />
+                <ScalarProperty Name="DirecActual" ColumnName="DirecActual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonaPaquetes">
+            <EntityTypeMapping TypeName="StartGymDBModel.PersonaPaquete">
+              <MappingFragment StoreEntitySet="PersonaPaquete">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdPaquete" ColumnName="IdPaquete" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="FecRegistro" ColumnName="FecRegistro" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelGrupoFamiliars">
+            <EntityTypeMapping TypeName="StartGymDBModel.RelGrupoFamiliar">
+              <MappingFragment StoreEntitySet="RelGrupoFamiliar">
+                <ScalarProperty Name="IdPersonaTitular" ColumnName="IdPersonaTitular" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelGrupoPersonas">
+            <EntityTypeMapping TypeName="StartGymDBModel.RelGrupoPersona">
+              <MappingFragment StoreEntitySet="RelGrupoPersonas">
+                <ScalarProperty Name="IdPersonaTitular" ColumnName="IdPersonaTitular" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telefonoes">
+            <EntityTypeMapping TypeName="StartGymDBModel.Telefono">
+              <MappingFragment StoreEntitySet="Telefono">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdTipoTelefono" ColumnName="IdTipoTelefono" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

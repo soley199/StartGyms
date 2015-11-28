@@ -1,0 +1,51 @@
+﻿@model IEnumerable<StarGyms.Models.CustomPeopleModel>
+
+<div class="col-xs-12">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">&Uacute;ltimas Personas Registradas</h3>
+        </div>
+        <div class="content">
+            <table class="dtOnlyFilter table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.IdPersona)</th>
+                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.TipoPersona)</th>
+                        <th>@Html.DisplayNameFor(model => model.Estatus)</th>
+                        <th>@Html.DisplayNameFor(model => model.FechaAlta)</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.IdPersona)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TipoPersona)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Estatus)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FechaAlta)</td>
+                            <td>
+                                <a href="@Url.Action("Edit",new { id = item.IdPersona })" title="Editar" class="AjaxLinkId"> <i class="fa fa-edit fa-lg fa-border"> </i> </a>
+                                <a href="@Url.Action("SetActive",new { id = item.IdPersona })" title="Activar/Inactivar" class="AjaxLinkId"> <i class="fa fa-trash fa-lg fa-border"> </i> </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /.box -->
+</div>
+<script type="text/javascript">
+        $('.dtOnlyFilter').DataTable({
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bInfo": false,
+            "bAutoWidth": true
+        });
+        AjaxLinkId();
+</script>

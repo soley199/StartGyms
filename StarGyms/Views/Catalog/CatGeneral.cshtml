@@ -1,0 +1,67 @@
+﻿@model StarGyms.Models.CatalogModel
+@{
+    ViewBag.Title = "Catalogos Generales";
+}
+
+<div class="col-xs-12">
+    <!-- Horizontal Form -->
+    <div class="box box-info" id="boxSearchPeople">
+        <!-- form start -->
+        @using (Ajax.BeginForm(
+            "LoadCatalog",
+            "Catalog",
+            null,
+            new AjaxOptions
+            {
+                HttpMethod = "post",
+                UpdateTargetId = "divRenderBodySearch",
+                InsertionMode = InsertionMode.Replace,
+                OnBegin = "divBlockUI();",
+                OnSuccess = "divUnBlockUI();"
+            },
+            new { @class = "form-horizontal" })
+            )
+        {
+            <div class="box-body">
+                <div class="input-group">
+                    @Html.DropDownListFor(m => m.IdCatalogo, new SelectList(Model.CatalogosTitulo,"IdCatalogo","Descripcion"), "[ TODOS ]",new { @class="form-control"})
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Buscar</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- /.box -->
+</div>
+<div id="divRenderBodySearch">
+    @Html.Partial("_CatGeneralList", Model.Catalogos)
+</div>
+
+<script type="text/javascript">
+    @*AutoComplete(
+        '@Html.IdFor(m => m.Buscar)',
+        '@Html.IdFor(m => m.Persona.IdPersona)',
+        '@HttpUtility.HtmlDecode(Url.Action("ClienteAutoComplete", "Json", new { buscar = " " })).Trim()',
+        true,
+        null,
+        null,
+        "IdPersona",
+        "Persona"
+        );*@
+
+    @*$("#typeaheadSearchPeople").typeahead({
+        items: 10,
+        minLength: 3,
+        name: 'SearchPeopleResult',
+        source: function (query, process) {
+            return $.getJSON(
+                '@Model.UrlAutoComplete',
+                { query: query },
+                function (data) {
+                    return process(data);
+                });
+        }
+    });*@
+</script>
+

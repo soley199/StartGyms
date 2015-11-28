@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="11db1ae8bb754db89e1c68ea5fc47e98" Name="Diagram1">
+        <EntityTypeShape EntityType="StartGymDBModel.Bitacora" Width="1.5" PointX="10.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.CAT_Perfil" Width="1.5" PointX="5.75" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.CAT_Producto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Contacto" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Empresa" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Menu" Width="1.5" PointX="5.75" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.MenuPerfil" Width="1.5" PointX="8" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Movimiento" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Pago" Width="1.5" PointX="8.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Paquete" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Parametro" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Persona" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.RelPagoMovimiento" Width="1.5" PointX="10.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Sucursale" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.TipoMovimiento" Width="1.5" PointX="3" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Usuario" Width="1.5" PointX="8" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.CalendarioPago" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.CatalogoGen" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Consecutivo" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.PersonaDireccion" Width="1.5" PointX="5.25" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.PersonaPaquete" Width="1.5" PointX="8.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.RelGrupoFamiliar" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.RelGrupoPersona" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartGymDBModel.Telefono" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="StartGymDBModel.FK__c0aa0ed6" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__1431d1af" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__92518509" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__b631d259" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__fb79a941" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__026de550" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__7547c7c2" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__837d5772" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__b222c2e9" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__bda86554" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__d29c05e1" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__2d07e15a" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__0ed252a5" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__17d749a9" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__5ba931b9" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__797ad4bd" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__fd5c9aa7" ManuallyRouted="false" />
+        <AssociationConnector Association="StartGymDBModel.FK__602fd70f" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

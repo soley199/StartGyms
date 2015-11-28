@@ -1,0 +1,60 @@
+﻿@model StarGyms.Models.SearchModel
+
+<div class="col-xs-12">
+    <!-- Horizontal Form -->
+    <div class="box box-info" id="boxSearchPeople">
+        <!-- form start -->
+        @using (Ajax.BeginForm(
+            Model.Action,
+            Model.Controller,
+            null, 
+            new AjaxOptions { 
+                HttpMethod="post",
+                UpdateTargetId = "divRenderBodySearch",
+                InsertionMode = InsertionMode.Replace,
+                OnBegin = "divBlockUI();",
+                OnSuccess = "divUnBlockUI();"
+            }, 
+            new { @class = "form-horizontal" })
+            )
+        {
+            <div class="box-body">
+                <div class="input-group">
+                    @Html.TextBoxFor(m => m.Buscar, new { @class = "form-control typeahead", placeholder = "Busca por Nombre, RFC o IdPersona ...", @id = "typeaheadSearchPeople", autocomplete = "off" })
+                    @Html.HiddenFor(m => m.Persona.IdPersona)
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Buscar</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- /.box -->
+</div>
+<script type="text/javascript">
+    @*AutoComplete(
+        '@Html.IdFor(m => m.Buscar)',
+        '@Html.IdFor(m => m.Persona.IdPersona)',
+        '@HttpUtility.HtmlDecode(Url.Action("ClienteAutoComplete", "Json", new { buscar = " " })).Trim()',
+        true,
+        null,
+        null,
+        "IdPersona",
+        "Persona"
+        );*@
+
+    @*$("#typeaheadSearchPeople").typeahead({
+        items: 10,
+        minLength: 3,
+        name: 'SearchPeopleResult',
+        source: function (query, process) {
+            return $.getJSON(
+                '@Model.UrlAutoComplete',
+                { query: query },
+                function (data) {
+                    return process(data);
+                });
+        }
+    });*@
+</script>
+

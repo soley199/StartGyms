@@ -1,0 +1,6 @@
+﻿@model StarGyms.Models.SearchModel
+
+@Html.Partial("_SearchPeople", Model)
+<div id="divRenderBodySearch">
+    @Html.Partial("_PeopleList", Model.Model)
+</div>

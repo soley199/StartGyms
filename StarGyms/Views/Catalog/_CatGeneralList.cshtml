@@ -1,0 +1,44 @@
+﻿@model IEnumerable<StarGyms.Models.CustomCatalogModel>
+
+<div class="col-xs-12">
+    <!-- Horizontal Form -->
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Lista en el Catalogo</h3>
+        </div>
+        <div class="content">
+            <table class="dtOnlyFilter table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.IdCatalogo)</th>
+                        <th>@Html.DisplayNameFor(model => model.Id)</th>
+                        <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.Default1)</th>
+                        <th>@Html.DisplayNameFor(model => model.Activo)</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.IdCatalogo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Default1)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Activo)</td>
+                            <td><a href="@Url.Action("Edit",new { idCatalogo = item.IdCatalogo, id = item.Id })" title="Editar" class="AjaxLinkId"> <i class="fa fa-edit fa-lg fa-border"> </i> </a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /.box -->
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('.dtOnlyFilter').DataTable();
+        AjaxLinkId();
+    });
+</script>
